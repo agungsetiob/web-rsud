@@ -174,7 +174,7 @@ class ContactController extends Controller
     public function hapusPengaduan($id)
     {
         if (Auth::user()->role == 'admin') {
-           //do something here man
+           //do something here
 
         //redirect to index
             return redirect('messages')->with(['success' => 'Data deleted succesfully']);
