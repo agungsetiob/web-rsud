@@ -107,9 +107,9 @@
             </li>
             @endif
 
-            <li class="nav-item {{ (request()->is('kendala-simrsgos')) ? 'active bg-active' : '' }}">
+            <li class="nav-item {{ (request()->is('pengaduan/list')) ? 'active bg-active' : '' }}">
                 <a class="nav-link" href="{{url('pengaduan/list')}}">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-comment-alt"></i>
                     <span>Pengaduan Masyarakat</span></a>
             </li>
 

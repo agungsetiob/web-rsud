@@ -29,14 +29,6 @@ Route::get('/profil', function () {
     return view('main.about', compact('title', 'profiles'));
 });
 
-Route::get('slot-online-gacor-terpercaya', function () {
-    if(!auth()->user()) {
-        return 'judi terus lu cuk, tobat!';
-    } else{
-        return 'jadilah manusia yang bermanfaat';
-    }
-});
-
 //call symlink through symlink.blade.php
 Route::get('/sym', function () {
     return view('symlink');
@@ -45,6 +37,10 @@ Route::get('/sym', function () {
 //call symlink through artisan
 Route::get('/storage', function () {
     Artisan::call('storage:link');
+});
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
 });
 
 Route::get('/', [HomeController::class, 'frontPage']);
@@ -107,10 +103,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/faqs/{faq}', [FaqController::class, 'destroy']);
     
     Route::get('pengaduan/list', [ContactController::class, 'daftarPengaduan']);
+    Route::get('pengaduan/laporan/{startdate}/{enddate}', [ContactController::class, 'cetakPengaduan']);
 
     Route::get('upload-file', [FileController::class, 'index']);
     Route::post('upload/file', [FileController::class, 'store']);
     Route::delete('delete/docs/{id}', [FileController::class, 'destroy']);
+
 
 });
 

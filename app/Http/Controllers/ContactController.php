@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Contact;
 use App\Models\Complain;
+use Barryvdh\DomPDF\Facade\PDF;
 use Auth;
 use URL;
 
@@ -135,14 +136,14 @@ class ContactController extends Controller
      */
     public function pengaduan()
     {
-        return view('admin.kendala');
+        return view('admin.complains');
     }
 
     public function simpanPengaduan(Request $request)
     {
         $this->validate($request, [
             'unit'      => 'required',
-            'complain'  => 'required|min:20',
+            'complain'  => 'required|min:25',
             'name'      => 'required',
             'address'   => 'required',
             'phone'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11',
@@ -154,6 +155,7 @@ class ContactController extends Controller
             'name'      => addslashes($request->name),
             'address'   => addslashes($request->address),
             'phone'     => $request->phone,
+            'date'=> date("Y-m-d"),
         ]);
 
         return redirect('pengaduan-masyarakat')->with(['success' => 'Berhasil kirim pengaduan']);
@@ -161,8 +163,8 @@ class ContactController extends Controller
 
     public function daftarPengaduan ()
     {
-        $kendalas = Complain::all();
-        return view('admin.daftar-kendala', compact('kendalas'));
+        $complains = Complain::all();
+        return view('admin.complains-list', compact('complains'));
     }
 
     /**
@@ -181,6 +183,16 @@ class ContactController extends Controller
         } else{
             return redirect()->back()->with('error', 'ingatlah dunia hanya sementara');
         }
+    }
+
+    public function cetakPengaduan($startdate, $enddate)
+    {
+        $complains = Complain::whereBetween('date',[$startdate, $enddate])->get();
+        $total = Complain::all()->count();
+        $pdf = PDF::loadview('admin.cetak',['complains' => $complains, 'total' => $total
+        ])->setPaper('A4', 'portrait');
+        set_time_limit(300);
+        return $pdf->stream('pengaduan-masyarakat.pdf');
     }
 
 

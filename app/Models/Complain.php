@@ -10,4 +10,11 @@ class Complain extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+        ->format('Y-m-d');
+    }
+
 }
