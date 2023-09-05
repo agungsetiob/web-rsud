@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CategoryController, 
                         ContactController, 
                         FaqController, 
-                        FileController};
+                        FileController,
+                        BackupController};
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -39,18 +40,14 @@ Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
 
-Route::get('/migrate', function () {
-    Artisan::call('migrate');
-});
-
 Route::get('/', [HomeController::class, 'frontPage']);
 Route::get('blog', [HomeController::class, 'index']);
-Route::get('blog/{category_id}/{category}', [HomeController::class, 'category']);
+Route::get('blog/{category}', [HomeController::class, 'category']);
 Route::get('blog/{slug}', [HomeController::class, 'show'])->name('blog');
 Route::get('our/specialists', [HomeController::class, 'doctor']);
 Route::get('our/doctors', [HomeController::class, 'doctorGeneral']);
 Route::get('leaderboard', [HomeController::class, 'rank']);
-Route::get('from/{user_id}/{username}', [HomeController::class, 'postByUser']);
+Route::get('from/{username}', [HomeController::class, 'postByUser']);
 Route::get('frequently-asked-question', [HomeController::class, 'faq'])->name('frequent.question');
 
 Route::get('standar-pelayanan', [StandarPelayananController::class, 'standarPelayanan']);
@@ -63,7 +60,6 @@ Route::get('document', [FileController::class, 'document'])->name('docs');
 //route group on my own
 Route::middleware(['auth'])->group(function () {
     Route::resource('/posts', \App\Http\Controllers\PostController::class);
-    //Route::get('/posts/{post}', [PostController::class, 'destroy']);
     Route::get('user/dashboard', [PostController::class, 'index']);
     Route::get('/dashboard', [PostController::class, 'userPost'])->name('dashboard');
     Route::get('/our-services', [PostController::class, 'services']);
@@ -108,6 +104,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('upload-file', [FileController::class, 'index']);
     Route::post('upload/file', [FileController::class, 'store']);
     Route::delete('delete/docs/{id}', [FileController::class, 'destroy']);
+
+    Route::get('/backup', [BackupController::class, 'index']);
+    Route::get('/backup/only-db', [BackupController::class, 'create']);
+    Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete']);
 
 
 });

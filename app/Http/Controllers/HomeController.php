@@ -44,11 +44,11 @@ class HomeController extends Controller
     public function frontPage()
     {
         $doctors = Doctor::inRandomOrder()
-                ->limit(4)
-                ->get();
+        ->limit(4)
+        ->get();
         $faqs = Faq::inRandomOrder()
-                ->limit(6)
-                ->get();
+        ->limit(6)
+        ->get();
 
         return view('main.index', compact('doctors', 'faqs'));
     }
@@ -57,8 +57,8 @@ class HomeController extends Controller
     public function doctor()
     {
         $doctors = Doctor::latest()
-                ->where('category', 'spesialis')
-                ->paginate(12);
+        ->where('category', 'spesialis')
+        ->paginate(12);
         $title = 'Dokter Spesialis';
         return view('main.doctor', compact('doctors', 'title'));
     }
@@ -67,8 +67,8 @@ class HomeController extends Controller
     public function doctorGeneral()
     {
         $doctors = Doctor::latest()
-                ->where('category', 'umum')
-                ->paginate(12);
+        ->where('category', 'umum')
+        ->paginate(12);
         $title = 'Dokter Umum';
         return view('main.doctor', compact('doctors', 'title'));
     }
@@ -172,22 +172,22 @@ class HomeController extends Controller
         $post = Post::where('slug', $slug)->first();
         if ($post) {
             $description = Str::limit($post->content, 40);
-            $post->view = $post->view + 1; //aktifkan nanti kalau sudah siap go live
+            $post->view = $post->view + 1;
             $post->save();
             $popularPosts = Post::latest('view')
-                            ->where('id', '!=', $post->id)
-                            ->limit(3)
-                            ->get();
+            ->where('id', '!=', $post->id)
+            ->limit(3)
+            ->get();
             $relatedPosts = Post::where([
-                            ['category_id', '=', $post->category_id],
-                            ['id', '!=', $post->id]
-                            ])
-                            ->limit(3)
-                            ->get();
+                ['category_id', '=', $post->category_id],
+                ['id', '!=', $post->id]
+            ])
+            ->limit(3)
+            ->get();
             return view('main.show', compact('post', 
-                                            'relatedPosts', 
-                                            'popularPosts', 
-                                            'description'));
+                'relatedPosts', 
+                'popularPosts', 
+                'description'));
         } else {
             return view ('errors.404');
         }
@@ -197,19 +197,20 @@ class HomeController extends Controller
     public function rank()
     { 
         $ranks = User::with('posts')
-                ->withCount('posts')
-                ->where('status', 'active')
-                ->orderByDesc('posts_count')
-                ->paginate(8);
+        ->withCount('posts')
+        ->where('status', 'active')
+        ->orderByDesc('posts_count')
+        ->paginate(8);
         $title = 'Top Author';
         return view ('main.leaderboard', compact('ranks', 'title'));
     }
 
-    public function category($category_id)
+    public function category($category)
     {
-        
-        $posts = Post::where('category_id', $category_id)
-            ->paginate(6);
+
+        $posts = Post::whereHas('category', function($q) use($category){
+            $q->where('name', $category);
+        })->paginate(6);
         $title = 'Sorted by Category';
         foreach ($posts as $post){
             $post->content = Str::limit($post->content, 40);   
@@ -217,12 +218,13 @@ class HomeController extends Controller
         return view ('main.blog', compact('posts', 'title'));
     }
 
-   public function postByUser($user_id)
+    public function postByUser($username)
     {
-        
+
         $title = 'Sorted by author';
-        $posts = Post::where('user_id', $user_id)
-            ->paginate(6);
+        $posts = Post::whereHas('user', function($q) use($username){
+            $q->where('username', $username);
+        })->paginate(6);
         foreach ($posts as $post){
             $post->content = Str::limit($post->content, 40);   
         }
@@ -305,7 +307,7 @@ class HomeController extends Controller
     {
         $title = 'Frequently Asked Questions';
         $faqs = Faq::inRandomOrder()
-                ->get();
+        ->get();
         return view('main.faq', compact('faqs', 'title'));
     }
 }

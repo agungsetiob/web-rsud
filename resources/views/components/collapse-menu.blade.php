@@ -86,6 +86,18 @@
                     <i class="fas fa-fw fa-hand-holding-medical"></i>
                     <span>Our Services</span></a>
             </li>
+
+            <li class="nav-item {{ (request()->is('pengaduan/list')) ? 'active bg-active' : '' }}">
+                <a class="nav-link" href="{{url('pengaduan/list')}}">
+                    <i class="fas fa-fw fa-comment-alt"></i>
+                    <span>Pengaduan Masyarakat</span></a>
+            </li>
+
+            <li class="nav-item {{ (request()->is('backup')) ? 'active bg-active' : '' }}">
+                <a class="nav-link" href="{{url('backup')}}">
+                    <i class="fas fa-fw fa-database"></i>
+                    <span>Backup</span></a>
+            </li>
             @elseif (Auth::user()->role == 'user')
             <li class="nav-item active {{ (request()->is('dashboard')) ? 'active bg-active' : '' }}">
                 <a class="nav-link" href="{{url('dashboard')}}">
@@ -106,12 +118,6 @@
                     <span>Standar Pelayanan</span></a>
             </li>
             @endif
-
-            <li class="nav-item {{ (request()->is('pengaduan/list')) ? 'active bg-active' : '' }}">
-                <a class="nav-link" href="{{url('pengaduan/list')}}">
-                    <i class="fas fa-fw fa-comment-alt"></i>
-                    <span>Pengaduan Masyarakat</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

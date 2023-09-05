@@ -56,7 +56,7 @@ img{max-width:53%;}
 	background: linear-gradient(to bottom,  #666666 0%,#666666 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#666666',GradientType=0 ); /* IE6-9 */
 	padding: 15px 20px;
-	border-radius: 1em;
+	border-radius: 0.5em;
 }
 .content a:hover{
 	color:#92c84c;

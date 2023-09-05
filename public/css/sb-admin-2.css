@@ -2583,6 +2583,18 @@ fieldset:disabled a.btn {
   border-color: #f8f9fc;
 }
 
+.btn-lapor {
+  color: #3a3b45;
+  background-color:#d0021b;
+  border-color: #f8f9fc;
+}
+
+.btn-lapor:hover {
+  color: #3a3b45;
+  background-color: #e02d1b;
+  border-color: #d52a1a;
+}
+
 .btn-light:hover {
   color: #3a3b45;
   background-color: #dde2f1;
