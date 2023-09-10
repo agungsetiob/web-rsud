@@ -125,6 +125,22 @@ class ContactController extends Controller
         }
     }
 
+    /**
+     * Cetak laporan messages
+     *
+     * 
+     * 
+     */
+    public function messagesReport($startdate, $enddate)
+    {
+        $messages = Contact::whereBetween('created_at',[$startdate, $enddate])->get();
+        $total = Contact::all()->count();
+        $pdf = PDF::loadview('admin.messages-report',['messages' => $messages, 'total' => $total
+        ])->setPaper('A4', 'portrait');
+        set_time_limit(300);
+        return $pdf->stream('messages.pdf');
+    }
+
 
 
 
@@ -163,8 +179,13 @@ class ContactController extends Controller
 
     public function daftarPengaduan ()
     {
-        $complains = Complain::all();
-        return view('admin.complains-list', compact('complains'));
+        
+        if(Auth::user()->role == 'admin'){
+            $complains = Complain::all();
+            return view('admin.complains-list', compact('complains'));
+        } else{
+            return view('errors.403');
+        }
     }
 
     /**
@@ -189,7 +210,7 @@ class ContactController extends Controller
     {
         $complains = Complain::whereBetween('date',[$startdate, $enddate])->get();
         $total = Complain::all()->count();
-        $pdf = PDF::loadview('admin.cetak',['complains' => $complains, 'total' => $total
+        $pdf = PDF::loadview('admin.cetak-pengaduan',['complains' => $complains, 'total' => $total
         ])->setPaper('A4', 'portrait');
         set_time_limit(300);
         return $pdf->stream('pengaduan-masyarakat.pdf');

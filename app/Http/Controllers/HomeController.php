@@ -211,7 +211,7 @@ class HomeController extends Controller
         $posts = Post::whereHas('category', function($q) use($category){
             $q->where('name', $category);
         })->paginate(6);
-        $title = 'Sorted by Category';
+        $title = $category;
         foreach ($posts as $post){
             $post->content = Str::limit($post->content, 40);   
         }

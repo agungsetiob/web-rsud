@@ -6,7 +6,7 @@
       href="{{url ('storage/logors.png')}}"
       type="image/x-icon"
     />
-    <title>{{ config('app.title', 'dr. H. Andi Abdurrahman Noor') }}</title>
+    <title>404 - Not Found</title>
     <link href="{{ asset('css/error.css') }}" rel="stylesheet" type="text/css"  media="all" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bangers">
 </head>

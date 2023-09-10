@@ -42,7 +42,7 @@ Route::get('/storage', function () {
 
 Route::get('/', [HomeController::class, 'frontPage']);
 Route::get('blog', [HomeController::class, 'index']);
-Route::get('blog/{category}', [HomeController::class, 'category']);
+Route::get('blog/category/{category}', [HomeController::class, 'category']);
 Route::get('blog/{slug}', [HomeController::class, 'show'])->name('blog');
 Route::get('our/specialists', [HomeController::class, 'doctor']);
 Route::get('our/doctors', [HomeController::class, 'doctorGeneral']);
@@ -86,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('messages', [ContactController::class, 'index']);
     Route::get('delete/message/{id}', [ContactController::class, 'destroy']);
+    Route::get('messages/laporan/{startdate}/{enddate}', [ContactController::class, 'messagesReport']);
 
 
     Route::get('setting/profile', [ProfileController::class, 'index']);

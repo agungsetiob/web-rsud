@@ -142,7 +142,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-borderless table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -158,7 +158,7 @@
                                             <td> {{$user->username}} </td>
                                             <td> {{$user->email}} </td>
                                             <td>
-                                                <div class="dropdown mb-4">
+                                                <div class="dropdown">
                                                     <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
                                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">

@@ -157,7 +157,7 @@
                   {{$post->user->username}}
                 </span>
                 </a>
-                <a href="{{ url('blog/'. $post->category->name) }}">
+                <a href="{{ url('blog/category/'. $post->category->name) }}">
                 <span
                   class="
                     bg-secondary

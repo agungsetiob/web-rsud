@@ -137,7 +137,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-borderless table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Nama File</th>
@@ -152,10 +152,10 @@
                                             <td> {{$file->created_at}} </td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" title="hapus" href="#" data-toggle="modal" data-target="#deleteModal{{$file->id}}">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash"></i>edit
                                                 </button>
                                                 <a class="btn btn-success btn-sm" title="download" href="{{Storage::url('docs/'. $file->file )}}" target="_blank">
-                                                <i class="fas fa-download"></i>
+                                                <i class="fas fa-download"></i> download
                                                 </a>
                                             </td>
                                         </tr>
