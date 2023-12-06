@@ -57,8 +57,8 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">RSUD dr. H. Andi Abdurrahman Noor</span>
                             <img class="img-profile rounded-circle"
@@ -182,6 +182,47 @@
                             </div>
                             @endif
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid pt-3"> 
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h1 class="h3 mb-0 text-primary">Complains</h1>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Keluhan</th>
+                                    <th>No Hp</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($complains as $com)
+                                <tr>
+                                    <td width="10"> {{$loop->iteration}} </td>
+                                    <td> {{$com->name}} </td>
+                                    <td> {{$com->complain}} </td>
+                                    <td> {{$com->phone}} </td>
+                                    <td> {{$com->date}} </td>      
+                                </tr>
+                                @empty
+                                <div class="alert alert-danger">
+                                    Data  is not available.
+                                </div>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

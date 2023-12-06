@@ -152,7 +152,8 @@ class ContactController extends Controller
      */
     public function pengaduan()
     {
-        return view('admin.complains');
+        $complains = Complain::all();
+        return view('admin.complains', compact('complains'));
     }
 
     public function simpanPengaduan(Request $request)

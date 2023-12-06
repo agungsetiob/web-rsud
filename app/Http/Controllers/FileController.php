@@ -28,7 +28,7 @@ class FileController extends Controller
     public function document()
     {
         $title = 'Dokumen Publik';
-        $files = File::all();
+        $files = File::latest()->get();
         return view('main.document', compact('title', 'files'));
     }
 
@@ -66,7 +66,8 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        //
+        $title = $file->name;
+        return view ('main.show-document', compact('file', 'title'));
     }
 
     /**

@@ -55,6 +55,7 @@ Route::get('standar-pelayanan', [StandarPelayananController::class, 'standarPela
 Route::post('send/message', [ContactController::class, 'store']);
 
 Route::get('document', [FileController::class, 'document'])->name('docs');
+Route::get('document/{file}', [FileController::class, 'show']);
 
 
 //route group on my own

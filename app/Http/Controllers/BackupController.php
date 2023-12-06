@@ -9,7 +9,7 @@ use Session;
 use Illuminate\Support\Facades\Storage;
 
 class BackupController extends Controller{
-     public function index(){
+    public function index(){
         $disk = Storage::disk(config('laravel-backup.backup.destination.disks'));
         $files = $disk->files('/public/RSUD/');
         $backups = [];
@@ -23,7 +23,7 @@ class BackupController extends Controller{
                 ];
            }
         }
-    $backups = array_reverse($backups);
+        $backups = array_reverse($backups);
         return view("admin.backups")->with(compact('backups'));
     }
 

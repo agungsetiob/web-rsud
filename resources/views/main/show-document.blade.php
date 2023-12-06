@@ -19,7 +19,7 @@
         <div class="flex flex-wrap items-center -mx-4">
           <div class="w-full px-4">
             <div class="text-center">
-              <h1 class="font-semibold text-white text-4xl">Dokumen</h1>
+              <h1 class="font-semibold text-white text-4xl">{{$file->name}}</h1>
             </div>
           </div>
         </div>
@@ -97,51 +97,11 @@
       <div class="container">
         <div class="flex flex-wrap -mx-4 justify-center">
 
-          <!-- dari sini sp -->
+         <iframe src="{{ asset('storage/docs/' . $file->file) }}" height="690" width="100%" frameborder="0" scrolling="auto"></iframe>
 
-          @forelse ($files as $file)
-          <div class="w-full sm:w-1/2 lg:w-1/4 px-4">
-            <div class="mb-10 group wow fadeInUp" data-wow-delay=".1s">
-              <div class="rounded overflow-hidden mb-8 text-center">
-                <a href="{{Storage::url('docs/'. $file->file )}}" class="block" target="_blank">
-                  <i class="fa 
-                      fa-file-pdf fa-8x
-                      transition
-                      group-hover:scale-125 
-                      group-hover:rotate-6
-                      text-red">
-                  </i>
-                </a>
-              </div>
-              <div class="text-center">
-                <h3>
-                  <a
-                    target="_blank"
-                    href="{{url('document/'. $file->id )}}"
-                    class="
-                      font-semibold
-                      text-xl
-                      sm:text-2xl
-                      lg:text-xl
-                      xl:text-2xl
-                      mb-4
-                      inline-block
-                      text-dark
-                      hover:text-primary
-                    "
-                  >
-                    {{$file->name}}
-                  </a>
-                </h3>
-              </div>
-            </div>
-          </div>
-          @empty
-            <div class="border border-red text-red px-4 py-3 rounded relative">
-              Data dokumen belum Tersedia.
-            </div>
-          @endforelse
+
       </div>
+    </div>
       <!-- disini kalau mau pagination -->
     </section>
     <!-- ====== Blog Section End -->
