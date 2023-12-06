@@ -49,8 +49,9 @@ class HomeController extends Controller
         $faqs = Faq::inRandomOrder()
         ->limit(6)
         ->get();
+        $posts = Post::latest()->limit(3)->get();
 
-        return view('main.index', compact('doctors', 'faqs'));
+        return view('main.index', compact('doctors', 'faqs', 'posts'));
     }
 
     //sp doctor for doctor page for visitors

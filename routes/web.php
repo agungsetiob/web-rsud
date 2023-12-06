@@ -41,7 +41,7 @@ Route::get('/storage', function () {
 });
 
 Route::get('/', [HomeController::class, 'frontPage']);
-Route::get('blog', [HomeController::class, 'index']);
+Route::get('blog', [HomeController::class, 'index'])->name('blog.index');
 Route::get('blog/category/{category}', [HomeController::class, 'category']);
 Route::get('blog/{slug}', [HomeController::class, 'show'])->name('blog');
 Route::get('our/specialists', [HomeController::class, 'doctor']);
